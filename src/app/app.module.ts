@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import './rxjs-extensions';
 
 import { AppComponent } from './app.component';
 import { CentreComponent } from './centre/centre.component';

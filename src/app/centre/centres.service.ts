@@ -10,8 +10,8 @@ export class CentresService {
   constructor(private http:Http) { }
 
 
-  getCentres() {
-    return this.http.get('/api/organizations')
+  getCentres(term: string): Observable<any[]> {
+    return this.http.get(`http://localhost:3000/api/organizations/?name=${term}`)
       .map(res => res.json().organizations);
   }
 

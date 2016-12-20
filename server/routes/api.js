@@ -4,13 +4,11 @@ const request = require('request');
 const dotenv = require('dotenv');
 const http = require('http');
 
-
-
 dotenv.config();
 
 const username = process.env.ZD_USER_NAME;
 const token = process.env.ZD_TOKEN;
-const url = process.env.ZD_URL;
+const baseUrl = 'https://esolhelpdesk.zendesk.com/api/v2/';
 
 
 /* GET api listing. */
@@ -19,6 +17,9 @@ router.get('/', (req, res) => {
 });
 
 router.get('/organizations', function (req, res) {
+  var name = req.query.name;
+  var url = baseUrl + `organizations/autocomplete.json?name=${name}`;
+  console.log(url);
   request.get(url, {
     'auth': {
       'user': username + '/token',
@@ -32,8 +33,7 @@ router.get('/organizations', function (req, res) {
     } else {
       res.setHeader('Content-Type', 'application/json');
       var centres = JSON.parse(body);
-      console.log(centres);
-      
+     
       res.send(centres);
       
       
