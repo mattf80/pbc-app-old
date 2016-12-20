@@ -26,6 +26,8 @@ npm-debug.log
 testem.log
 /typings
 .env
+wine-app-5f24b-firebase-adminsdk-0w4de-2acc73c401.json
+/chromeDummyDir
 
 # e2e
 /e2e/*.js

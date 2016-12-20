@@ -34,12 +34,11 @@ export class CentreComponent implements OnInit {
     this.searchTerms.next(term);
   }
 
-  Onsearch(term: string) {
-    this.centresService.getCentres(term)
-      .subscribe(centres => {
-        this.centres = centres;
-        console.log(centres);
-      });
+  addVersion(){
+    this.centresService.addVersion()
+      .subscribe(data => {
+        console.log(data);
+      })
   }
 
 }

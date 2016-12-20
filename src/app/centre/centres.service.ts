@@ -15,4 +15,7 @@ export class CentresService {
       .map(res => res.json().organizations);
   }
 
+  addVersion(): Observable<any> {
+    return this.http.get(`http://localhost:3000/api/centres`);
+  }
 }

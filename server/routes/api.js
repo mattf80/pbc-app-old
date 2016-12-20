@@ -3,6 +3,7 @@ const router = express.Router();
 const request = require('request');
 const dotenv = require('dotenv');
 const http = require('http');
+const firebase = require('./../database/firebase-service');
 
 dotenv.config();
 
@@ -15,6 +16,12 @@ const baseUrl = 'https://esolhelpdesk.zendesk.com/api/v2/';
 router.get('/', (req, res) => {
   res.send('api works');
 });
+
+router.get('/centres', (req, res) => {
+    firebase.addNewVersion();
+});
+
+
 
 router.get('/organizations', function (req, res) {
   var name = req.query.name;
@@ -34,8 +41,7 @@ router.get('/organizations', function (req, res) {
       res.setHeader('Content-Type', 'application/json');
       var centres = JSON.parse(body);
      
-      res.send(centres);
-      
+      res.send(centres);      
       
       // var org_list = [];
       // for (var i = 0; i < data['organizations'].length; i++) {

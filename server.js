@@ -8,6 +8,9 @@ const cors = require('cors');
 
 // Get our API routes
 const api = require('./server/routes/api');
+const versionRoutes = require('./server/routes/versions');
+
+const db = require('./server/database/firebase-service')
 
 const app = express();
 dotenv.config();
@@ -22,7 +25,9 @@ app.use(express.static(path.join(__dirname, 'dist')));
 app.use(cors());
 
 // Set our api routes
+app.use('/api/versions', versionRoutes)
 app.use('/api', api);
+
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
