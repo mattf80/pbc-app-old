@@ -1,21 +1,28 @@
 var express = require('express');
 var router = express.Router();
+const firebase = require('./../database/firebase-service');
 
-router.post('/', function (req, res, next){
+router.get('/', function (req, res, next) {
+    firebase.getVersions(function(versions){
+        res.status(201).json({
+        message: 'Success...',
+        versions: versions
+    });
+    });    
+});
+
+
+router.post('/', function (req, res, next) {
     var version = {
         exam: req.body.exam,
         version: req.body.version
     };
-    version.save(function(err, result) {
-        if (err) {
-            return res.status(500).json({
-                title: 'An error occurred.',
-                error: err
-            });
-        }
-        res.status(201).json({
-            message: 'Created new version...',
-            obj: result
-        });
+    firebase.addVersion(version);
+    res.status(201).json({
+        message: 'Created new version...',
+        obj: version
     });
 });
+
+
+module.exports = router;

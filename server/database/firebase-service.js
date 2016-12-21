@@ -13,19 +13,28 @@ admin.initializeApp({
 var db = admin.database();
 var ref = db.ref("versions");
 
-ref.on("value", function(snapshot) {
-  console.log(snapshot.val());
-}, function (errorObject) {
-  console.log("The read failed: " + errorObject.code);
-});
+// ref.on("value", function(snapshot) {
+//   console.log(snapshot.val());
+// }, function (errorObject) {
+//   console.log("The read failed: " + errorObject.code);
+// });
 
 
 
-exports.addNewVersion = function(){
-    ref.push({        
-            title: "Terry K",
-            centre: "TK010",
-            pushed: false
-    });
+function addNewVersion(version) {
+    return ref.push(version);
 }
 
+function getVersions(callback) {
+  var versions;
+
+  ref.on("value", function(snapshot) {
+    versions = snapshot.val();
+    callback(versions);
+  });
+}
+
+module.exports = {
+  addVersion: addNewVersion,
+  getVersions: getVersions
+} 
